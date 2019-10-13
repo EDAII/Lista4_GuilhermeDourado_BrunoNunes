@@ -1,2 +1,2 @@
-# Lista4_GuilhermeDourado_BrunoNunes
-Lista 4 EDA II Heap
+# Visualização do funcionamento de um heap com métodos de inserção e remoção
+- Para executar, abra o arquivo index.html em seu navegador.
