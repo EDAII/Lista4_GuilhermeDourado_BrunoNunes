@@ -80,7 +80,7 @@ var insertNode = function(value) {
         return d.children || d._children ? 'end' : 'start'; })
       .text(function(d) { return d.value; })
       .style('fill-opacity', 1)
-      .attr('stroke', 'yellow');
+      .attr('stroke', 'white');
 
   // Add entering links in the parent’s old position.
   link.enter().insert("path", ".node")
