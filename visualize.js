@@ -1,12 +1,3 @@
-/* 
-* @Author: kuychaco
-* @Date:   2015-07-12 12:34:43
-* @Last Modified by:   kuychaco
-* @Last Modified time: 2015-07-12 12:53:22
-*/
-
-'use strict';
-
 // D3 code for tree visualization
 var width = 960,
     height = 800;
@@ -36,32 +27,32 @@ var initialNode = svg.selectAll(".node"),
 var duration = 0.75*stepDelay;
 
 
-// reinicia valor inicial
+// Restore to initial state
 var restoreInitial = function() {
-  // reinicia raiz e nós para os estados iniciais
+  // Reset root and nodes to initial state
   root = {};
   nodes = tree(root);
   root.parent = root;
   root.px = root.x;
   root.py = root.y;
 
-  // remove o nó
+  // Remove node from DOM
   animateSwap();
 
-  // reseta nó
+  // Reset node to initial state
   node = initialNode;
 };
 
 
-// atualiza o array de nós para a animacao d3
+// Update the array of nodes for the d3 tree layout based on adding nodes during Heap methods
 var insertNode = function(value) {
   
   if (nodes[0].value === undefined) {
-    // se o primeiro valor é adicionado ao heap, troca com a raiz
+    // If first value is added to heap, modify root node
     nodes[0].value = value;
     nodes[0].id = 0;
   } else {
-    // adiciona um novo nó ao seu nó pai
+    // Add a new node to its parent in the heap.
     var n = {id: nodes.length, value: value},
         p = nodes[Math.ceil((nodes.length-2)/2)];
     if (p.children) p.children.push(n); else p.children = [n];
@@ -75,13 +66,13 @@ var insertNode = function(value) {
   var nodeEnter = node.enter().append('g')
       .attr('class', 'node');
 
-  // adicionando animação dos nós 
+  // Add entering nodes in the parent’s old position.
   nodeEnter.append("circle")
       .attr("r", 20)
       .attr("cx", function(d) { return d.parent.px; })
       .attr("cy", function(d) { return d.parent.py; });
 
-  // adicionando texto dos valores às animações dos nós
+  // Add text to entering nodes
   nodeEnter.append('text')
       .attr("x", function(d) { return d.parent.px; })
       .attr("y", function(d) { return d.parent.py; })
@@ -89,7 +80,7 @@ var insertNode = function(value) {
         return d.children || d._children ? 'end' : 'start'; })
       .text(function(d) { return d.value; })
       .style('fill-opacity', 1)
-      .attr("stroke", "yellow");
+      .attr('stroke', 'yellow');
 
   // Add entering links in the parent’s old position.
   link.enter().insert("path", ".node")
